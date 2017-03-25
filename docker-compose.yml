@@ -1,0 +1,46 @@
+version: "2"
+services: 
+  # Nginx 1.11.10: https://hub.docker.com/_/nginx/
+  web:
+    image: nginx:1.11.10
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+    # 同 php 一起共享 ./apps 目录
+    volumes_from:
+      - php
+    # 创建一个数据卷，由 ./images/nginx/config => /etc/nginx/conf.d
+    volumes:
+      - ./images/nginx/config:/etc/nginx/conf.d:ro
+
+  # PHP 7.1-fpm: https://hub.docker.com/_/php/
+  php:
+    # image: php:7.1-fpm
+    build: 
+      context: ./images/php
+      dockerfile: Dockerfile
+    volumes: 
+      - ./apps:/mnt/apps
+
+  # MySQL 5.7: https://hub.docker.com/_/mysql/
+  database: 
+    image: mysql:5.7
+    # 配置一些环境变量，具体的环境变量细节可以访问上面的网址查看
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "dailybird"
+      MYSQL_PASSWORD: "dailybirdo"
+    volumes:
+      - ./database:/var/lib/mysql
+  
+  # 用于 Git，Composer 等工具
+  console:
+    build: 
+      context: ./images/console
+      dockerfile: Dockerfile
+    volumes_from: 
+      - php
+    tty: true
+
+
