@@ -1,5 +1,7 @@
 # docker-compose-lnmp
 
+> PHP 7.1.3 fpm & Nginx 1.11.10 & MySQL 5.7
+
 ## 自定义
 在创建容器前，有一些内容需要按照实际情况进行修改：
 ### docker-compose.yml
