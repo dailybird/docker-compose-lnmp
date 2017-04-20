@@ -1,7 +1,6 @@
 # docker-compose-lnmp
 
-> PHP 7.1.3 fpm & Nginx 1.11.10 & MySQL 5.7  
--- 2017.4.20 更新：为 database 添加 3306:3306 映射以便远程连接；
+> PHP 7.1.3 fpm & Nginx 1.11.10 & MySQL 5.7
 
 ## 自定义
 在创建容器前，有一些内容需要按照实际情况进行修改：
@@ -38,3 +37,6 @@ docker-compose up --build -d
 ```
 docker-compose down
 ```
+---
+### 更新
+- 2017.4.20：为 database 添加 3306:3306 映射以便远程连接；
