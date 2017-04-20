@@ -26,6 +26,9 @@ services:
   # MySQL 5.7: https://hub.docker.com/_/mysql/
   database: 
     image: mysql:5.7
+    # 设置 3306 端口映射以便远程连接
+    ports:
+      - 3306:3306
     # 配置一些环境变量，具体的环境变量细节可以访问上面的网址查看
     environment:
       MYSQL_ROOT_PASSWORD: "root"
